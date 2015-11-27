@@ -1,4 +1,4 @@
-# monocle
+# monocle [![GoDoc](https://godoc.org/github.com/gosuri/monocle?status.svg)](https://godoc.org/github.com/gosuri/monocle) [![Build Status](https://travis-ci.org/gosuri/monocle.svg?branch=master)](https://travis-ci.org/gosuri/monocle)
 
 Monocle is a go library for advanced command line help. It extends [Cobra](https://github.com/spf13/cobra) library and provides a set of powerful features to customize generate help for a root command.
 
