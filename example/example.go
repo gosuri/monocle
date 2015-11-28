@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 
+	"github.com/gosuri/cmdns"
 	"github.com/gosuri/monocle"
 	"github.com/spf13/cobra"
 )
@@ -11,7 +12,9 @@ var helpFunc = func(cmd *cobra.Command, args []string) { cmd.Help() }
 var runFunc = func(cmd *cobra.Command, args []string) { fmt.Println("run", cmd.Name()) }
 
 func main() {
-	ovrclk := &cobra.Command{Use: "ovrclk", Short: "Utility to manage your clusters and applications"}
+	var verbose bool
+	ovrclk := &cobra.Command{Use: "ovrclk", Short: "Utility to manage your clusters and applications", Run: helpFunc}
+	ovrclk.Flags().BoolVarP(&verbose, "verbose", "v", false, "verbose mode")
 
 	var app string
 	appInfo := &cobra.Command{Use: "info", Short: "display app info", Run: runFunc}
@@ -35,6 +38,8 @@ func main() {
 
 	// Set primary topics
 	monocle.Primary(apps, clusters)
+
+	cmdns.Namespace(ovrclk)
 
 	ovrclk.Execute()
 }

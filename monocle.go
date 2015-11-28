@@ -36,9 +36,9 @@ func (m *Monocle) Enable(c *cobra.Command) {
 
 // UsageFunc returns the usage function that'll be used for the command
 func (m *Monocle) UsageFunc() (f func(*cobra.Command) error) {
-	if m.Command.HasParent() {
-		return m.Command.Parent().UsageFunc()
-	}
+	// if m.Command.HasParent() {
+	// 	return m.Command.Parent().UsageFunc()
+	// }
 	return func(c *cobra.Command) error {
 		if c == m.Command {
 			return tmpl(c.Out(), topicTemplate, m)

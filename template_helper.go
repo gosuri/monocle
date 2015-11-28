@@ -34,8 +34,7 @@ func tmpl(w io.Writer, text string, data interface{}) error {
 	return t.Execute(w, data)
 }
 
-const topicTemplate = `{{$m := .}}{{with .Command}}Usage: {{if .Runnable}}
-  {{.UseLine}}{{if .HasFlags}} [flags]{{end}}{{end}}{{if .HasSubCommands}}{{ .CommandPath}} COMMAND {{end}}
+const topicTemplate = `{{$m := .}}{{with .Command}}Usage: {{if .Runnable}}{{.UseLine}}{{if .HasSubCommands}} COMMAND{{end}}{{if .HasFlags}} [flags]{{end}}{{end}}
 
 {{ if gt $m.PrimaryCommands 0 }}Primary help topics, type "{{.Name}} help TOPIC" for more details:
 {{range $m.PrimaryCommands}}{{if .IsAvailableCommand}}
