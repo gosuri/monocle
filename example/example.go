@@ -13,13 +13,13 @@ var runFunc = func(cmd *cobra.Command, args []string) { fmt.Println("run", cmd.N
 
 func main() {
 	var verbose bool
-	ovrclk := &cobra.Command{Use: "ovrclk", Short: "Utility to manage your clusters and applications", Run: helpFunc}
+	ovrclk := &cobra.Command{Use: "ovrclk", Short: "Utility to manage your clusters and applications"}
 	ovrclk.Flags().BoolVarP(&verbose, "verbose", "v", false, "verbose mode")
 
 	var app string
 	appInfo := &cobra.Command{Use: "info", Short: "display app info", Run: runFunc}
 	appInfo.Flags().StringVarP(&app, "app", "a", "", "app name")
-	apps := &cobra.Command{Use: "apps", Short: "manage apps", Long: "list all apps", Run: runFunc}
+	apps := &cobra.Command{Use: "apps", Short: "manage apps", Long: "List all apps", Run: runFunc}
 	apps.AddCommand(appInfo)
 	ovrclk.AddCommand(apps)
 
@@ -38,7 +38,6 @@ func main() {
 
 	// Set primary topics
 	monocle.Primary(apps, clusters)
-
 	cmdns.Namespace(ovrclk)
 
 	ovrclk.Execute()
