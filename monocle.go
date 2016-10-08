@@ -41,9 +41,9 @@ func (m *Monocle) UsageFunc() (f func(*cobra.Command) error) {
 	// }
 	return func(c *cobra.Command) error {
 		if c == m.Command {
-			return tmpl(c.Out(), topicTemplate, m)
+			return tmpl(c.OutOrStderr(), topicTemplate, m)
 		}
-		return tmpl(c.Out(), usageTemplate, c)
+		return tmpl(c.OutOrStderr(), usageTemplate, c)
 	}
 }
 
