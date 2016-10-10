@@ -1,6 +1,8 @@
 package monocle
 
 import (
+	"strings"
+
 	"github.com/spf13/cobra"
 )
 
@@ -65,7 +67,12 @@ func (m *Monocle) AdditionalCommands() []*cobra.Command {
 		for _, cmd := range m.Command.Commands() {
 			include := true
 			for _, primaryCmd := range m.primaries {
-				if cmd == primaryCmd {
+				switch {
+				case cmd == primaryCmd:
+					include = false
+					break
+					// there is perhaps an elegant way to check to namespaced commands
+				case strings.Contains(cmd.Name(), ":"):
 					include = false
 					break
 				}

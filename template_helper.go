@@ -2,11 +2,12 @@ package monocle
 
 import (
 	"fmt"
-	"github.com/spf13/cobra"
 	"io"
 	"strings"
 	"text/template"
 	"unicode"
+
+	"github.com/spf13/cobra"
 )
 
 var templateFuncs template.FuncMap = template.FuncMap{
@@ -48,7 +49,7 @@ const topicTemplate = `{{$m := .}}{{with .Command}}Usage: {{.UseLine}}{{if .HasS
   {{rpad .Name .NamePadding }} {{.Short}}{{end}}{{end}}{{ end }}{{end}}
 `
 
-const usageTemplate = `Usage:{{if .Runnable}}{{.UseLine}}{{if .HasFlags}} [flags]{{end}}{{end}}{{if .HasSubCommands}}
+const usageTemplate = `Usage:{{if .Runnable}} {{.UseLine}}{{if .HasFlags}} [flags]{{end}}{{end}}{{if .HasSubCommands}}
   {{ .CommandPath}} [command]{{end}}{{if gt .Aliases 0}}
 
  Aliases:
