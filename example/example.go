@@ -41,7 +41,7 @@ func main() {
 	monocle.Enable(ovrclk)
 
 	// Set primary topics
-	monocle.Primary(apps, clusters, auth)
+	monocle.Primary(apps, clusters)
 	cmdns.Namespace(ovrclk)
 
 	ovrclk.Execute()

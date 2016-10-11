@@ -38,14 +38,14 @@ func tmpl(w io.Writer, text string, data interface{}) error {
 const topicTemplate = `{{$m := .}}{{with .Command}}Usage: {{.UseLine}}{{if .HasSubCommands}} COMMAND{{end}}{{if .HasFlags}} [flags]{{end}}
 
 {{ if gt $m.PrimaryCommands 0 }}Primary help topics, type "{{.Name}} help TOPIC" for more details:
-{{range $m.PrimaryCommands}}
-  {{rpad .Name .NamePadding }} {{.Short}}{{end}}
+{{range $m.PrimaryCommands}}{{if $m.IsCommandTopic .}}
+  {{rpad .Name .NamePadding }} {{.Short}}{{end}}{{end}} 
 
 {{ if gt $m.AdditionalCommands 0 }}Additional topics:
-{{range $m.AdditionalCommands}}{{if .IsAvailableCommand}}
+{{range $m.AdditionalCommands}}{{if $m.IsCommandTopic .}}
   {{rpad .Name .NamePadding }} {{.Short}}{{end}}{{end}}
 {{ end }}{{ else }}Help topics, type "{{.Name}} help TOPIC" for more details:
-{{range .Commands}}{{if .IsAvailableCommand}}
+{{range .Commands}}{{if $m.IsCommandTopic .}}
   {{rpad .Name .NamePadding }} {{.Short}}{{end}}{{end}}{{ end }}{{end}}
 `
 

@@ -59,6 +59,10 @@ func (m *Monocle) PrimaryCommands() []*cobra.Command {
 	return m.primaries
 }
 
+func (m *Monocle) IsCommandTopic(cmd *cobra.Command) bool {
+	return (cmd.HasSubCommands() || cmd.IsAvailableCommand())
+}
+
 // AdditionalCommands returns the a list addtional commands when a primary command is specified. Returns nil otherwise
 func (m *Monocle) AdditionalCommands() []*cobra.Command {
 	hasPrimary := len(m.primaries) > 0
