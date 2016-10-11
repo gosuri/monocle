@@ -30,6 +30,10 @@ func main() {
 	clusters.AddCommand(clusterInfo)
 	ovrclk.AddCommand(clusters)
 
+	auth := &cobra.Command{Use: "auth", Short: "manage auth", Long: "manage auth"}
+	auth.AddCommand(&cobra.Command{Use: "token", Short: "display auth token", Run: runFunc})
+	ovrclk.AddCommand(auth)
+
 	version := &cobra.Command{Use: "version", Short: "display version", Run: runFunc}
 	ovrclk.AddCommand(version)
 
@@ -37,7 +41,7 @@ func main() {
 	monocle.Enable(ovrclk)
 
 	// Set primary topics
-	monocle.Primary(apps, clusters)
+	monocle.Primary(apps, clusters, auth)
 	cmdns.Namespace(ovrclk)
 
 	ovrclk.Execute()
